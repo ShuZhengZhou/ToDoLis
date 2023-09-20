@@ -82,7 +82,7 @@ function setVideoSize() {
     };
 
     // Play/Pause button for video background      
-    const btn = $("#tm-video-control-button");
+    const btn = document.getElementById("tm-video-control-button");
 
     btn.on("click", function(e) {
       const video = document.getElementById("tm-video");
