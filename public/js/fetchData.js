@@ -12,7 +12,7 @@ async function fetchData() {
         return;
        } else {
         DisplayedIncidents.push(incident.name);
-       } 
+       }
 
       const incidentDiv = document.createElement('div');
       incidentDiv.innerHTML = `
@@ -49,15 +49,15 @@ async function submitForm(event) {
   
     if (response.status === 200) {
       alert('Incident created successfully');
-      document.getElementById('incidentForm').reset();
-      fetchData();
+      //document.getElementById('incidentForm').reset();
+      //fetchData();
     } else {
       alert('Error creating incident');
     }
-    refresh();
+    
+    fetchData();
   }
 
-  
   document.addEventListener("DOMContentLoaded", fetchData());
-  document.getElementById('incidentForm').addEventListener('submit', submitForm);
+  document.getElementById('submitBtn').addEventListener('click', submitForm);
   

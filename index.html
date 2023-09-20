@@ -10,60 +10,58 @@
   <script type="text/javascript" defer src="/js/script.js"></script>
   <script type="text/javascript" defer src="/js/fetchData.js"></script>
 </head>
+
 <body>
-  <header class="header">
-    <a href="/" class="header__logo">NodeJs</a>
-  
-    <nav class="header__nav">
-      <ul>
-        <li>
-          <a href="/" class="header_link">Home</a>
-        </li>
-        <li>
-          <a href="/about" class="header_link">About</a>
-        </li>
-        <li>
-          <a href="/contact" class="header_link">Contact</a>
-        </li>
-      </ul>
-    </nav>
-  
-    <div class="header__button">
-      <button class="searchBtn" aria-expanded="false">
-        Search
-        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M7.79167 13.4583C10.9213 13.4583 13.4583 10.9213 13.4583 7.79167C13.4583 4.66205 10.9213 2.125 7.79167 2.125C4.66205 2.125 2.125 4.66205 2.125 7.79167C2.125 10.9213 4.66205 13.4583 7.79167 13.4583Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M14.875 14.875L11.7938 11.7938" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-  
-  </header>
-
-  <section id="Main">
-    <form id="incidentForm">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-    
-      <label for="type">Type:</label>
-      <input type="text" id="type" name="type" required>
-    
-      <label for="context">Context:</label>
-      <textarea id="context" name="context"></textarea>
-    
-      <label for="deadline">Deadline:</label>
-      <input type="datetime-local" id="deadline" name="deadline" required>
-    
-      <label for="pic">PIC:</label>
-      <input type="text" id="pic" name="pic" required>
-    
-      <button type="submit">Submit</button>
-    </form>
-  </section>
-
-  <footer class="footer">
-    Built with NodeJs & MongoDB
-  </footer>
-
+    <section id="Main" class="vh-100" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-lg-9 col-xl-7">
+                    <div class="card rounded-3">
+                        <div class="card-body p-4">
+        
+                            <h4 class="text-center my-3 pb-3">To Do App</h4>
+        
+                            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
+                                <div class="col-12">
+                                    <div class="form-outline">
+                                        <form id="incidentForm">
+                                            <label for="name">Name:</label>
+                                            <input type="text" id="name" name="name" required>
+                                        
+                                            <label for="type">Type:</label>
+                                            <input type="text" id="type" name="type" required>
+                                        
+                                            <label for="context">Context:</label>
+                                            <textarea id="context" name="context"></textarea>
+                                        
+                                            <label for="deadline">Deadline:</label>
+                                            <input type="datetime-local" id="deadline" name="deadline" required>
+                                        
+                                            <label for="pic">PIC:</label>
+                                            <input type="text" id="pic" name="pic" required>
+                                        
+                                        </form>
+                                    </div>
+                                </div>
+            
+                                <div id="submitBtn" class="col-12" onclick="submitForm()">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+            
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-warning">Get tasks</button>
+                                </div>
+                            </form>
+        
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
-</html>
+
+<footer class="footer">
+    Built with NodeJs & MongoDB
+</footer>
