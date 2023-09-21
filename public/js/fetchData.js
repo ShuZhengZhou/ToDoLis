@@ -25,6 +25,14 @@ async function fetchData() {
         <p>PIC: ${incident.PIC}</p>
         <p>Status: ${incident.status}</p>
         <button class="deleteBtn" id="${incident._id}">Delete</button>
+        <div class="dropdown">
+          <button class="dropbtn" id="${incident._id}">Change Status</button>
+          <div class="dropdown-content">
+            <button class="updateBtn" id="${incident._id},New" data-tgtStatus="New">New</button>
+            <button class="updateBtn" id="${incident._id},Completed" data-tgtStatus="Completed">Completed</button>
+            <button class="updateBtn" id="${incident._id},In Progress" data-tgtStatus="In progress">In progress</button>
+          </div>
+        </div>
       `;
       listSection.appendChild(incidentDiv);
     });
@@ -61,26 +69,42 @@ async function submitForm(event) {
   fetchData();
 }
 
-
 listSection.addEventListener('click', async function(event) {
   if (event.target.classList.contains('deleteBtn')) {
     const incidentId = event.target.id;
     const response = await fetch(`/deleteIncident/${incidentId}`, { method: 'DELETE' });
     if (response.status === 200) {
       alert('Incident deleted successfully');
-      refresh();
     } else {
       alert('Error deleting incident');
     }
   }
+  else if (event.target.classList.contains('updateBtn')) {
+    const tempArr = event.target.id.split(",");
+    const incidentId = tempArr[0];
+    const tgtStatus = tempArr[1];
+    const response = await fetch(`/updateIncident/${incidentId}`, { 
+      method: 'PUT' ,
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({ newStatus: tgtStatus })
+    });
+    if (response === 200) {
+      alert('Incident updated successfully');
+    } else {
+      //alert('Error updating incident');
+    }
+  }
+  refresh();
 });
+
 
 function refresh() {
   listSection.innerHTML = '';
   DisplayedIncidents = [];
   fetchData();
 }
-
 
 document.addEventListener("DOMContentLoaded", fetchData());
 document.getElementById('submitBtn').addEventListener('click', submitForm);

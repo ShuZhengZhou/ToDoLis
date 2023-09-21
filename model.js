@@ -26,7 +26,6 @@ const IncidentSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum:['New', 'Comleted', 'In Progress'],
     required: true,
     default: 'New' 
   }

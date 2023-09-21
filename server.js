@@ -29,6 +29,7 @@ app.use(bodyParser.json());
 //---------------------------------------------------------
 
 app.use(express.static('public'));
+app.use(express.json());
 
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/index.html');
@@ -59,6 +60,24 @@ app.delete('/deleteIncident/:id', async function(req, res) {
     res.sendStatus(500);
   }
 });
+
+
+app.put('/updateIncident/:id', async function(req, res) {
+  console.log('update operation called');
+  const incidentId = req.params.id;
+  const newStatus = req.body.newStatus;
+  console.log(incidentId);
+  console.log(newStatus);
+  //console.log(req);
+  try {
+    await Incident.findByIdAndUpdate(incidentId, {status:newStatus});
+    res.sendStatus(200);
+  } catch (err) {
+    //console.error(`Error updating incident. ${err}`);
+    res.sendStatus(500);
+  }
+});
+
 
 app.listen(PORT, function() {
     console.log('server started');
