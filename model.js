@@ -23,6 +23,12 @@ const IncidentSchema = new mongoose.Schema({
   PIC: {
     type: String,
     required: true
+  },
+  status: {
+    type: String,
+    enum:['New', 'Comleted', 'In Progress'],
+    required: true,
+    default: 'New' 
   }
 });
 

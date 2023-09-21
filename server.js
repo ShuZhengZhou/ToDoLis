@@ -46,6 +46,20 @@ app.post('/createIncident', async function(req, res) {
     res.sendStatus(200);
   });
 
+
+app.delete('/deleteIncident/:id', async function(req, res) {
+  console.log('delete operation called');
+  const incidentId = req.params.id;
+  console.log(incidentId);
+  try {
+    await Incident.findByIdAndDelete(incidentId);
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(`Error deleting incident. ${err}`);
+    res.sendStatus(500);
+  }
+});
+
 app.listen(PORT, function() {
     console.log('server started');
     console.log(`Listening to Port ${PORT}`);
