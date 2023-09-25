@@ -41,3 +41,49 @@
 .dropdown:hover .dropdown-content {display: block;}
 
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.form-outline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+#incidentForm label {
+  font-weight: bold;
+}
+
+#incidentForm input[type="text"],
+#incidentForm textarea,
+#incidentForm input[type="datetime-local"] {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#incidentForm input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#incidentForm input[type="submit"]:hover {
+  background-color: #0062cc;
+}
+
+.submitBtn {
+  background-color: #7c0a99;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}

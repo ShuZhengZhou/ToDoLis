@@ -24,13 +24,13 @@ async function fetchData() {
         <p>Deadline: ${new Date(incident.Deadline).toLocaleString()}</p>
         <p>PIC: ${incident.PIC}</p>
         <p>Status: ${incident.status}</p>
-        <button class="deleteBtn" id="${incident._id}">Delete</button>
+        <button class="deleteBtn" id="${incident._id}" onclick="deleteIncident(id)">Delete</button>
         <div class="dropdown">
           <button class="dropbtn" id="${incident._id}">Change Status</button>
           <div class="dropdown-content">
-            <button class="updateBtn" id="${incident._id},New" data-tgtStatus="New">New</button>
-            <button class="updateBtn" id="${incident._id},Completed" data-tgtStatus="Completed">Completed</button>
-            <button class="updateBtn" id="${incident._id},In Progress" data-tgtStatus="In progress">In progress</button>
+            <button class="updateBtn" id="${incident._id},New" onclick="updateIncident(id)">New</button>
+            <button class="updateBtn" id="${incident._id},Completed" onclick="updateIncident(id)">Completed</button>
+            <button class="updateBtn" id="${incident._id},In Progress" onclick="updateIncident(id)">In progress</button>
           </div>
         </div>
       `;
@@ -40,14 +40,27 @@ async function fetchData() {
 
 
   // Add this function to your fetchData.js file
-async function submitForm(event) {
-  event.preventDefault();
+async function submitForm() {
+
+  const name = document.getElementById('name').value;
+  const type = document.getElementById('type').value;
+  const context =  document.getElementById('context').value;
+  const Deadline =  document.getElementById('deadline').value;
+  const PIC =  document.getElementById('pic').value;
+
+  if (!name || !type || !Deadline || !PIC) {
+    const errorMessage = document.getElementById('error-message');
+    errorMessage.textContent = "Please fill out all required fields";
+    errorMessage.style.color = 'red';
+    return;
+  }
+
   const incidentData = {
-    name: document.getElementById('name').value,
-    type: document.getElementById('type').value,
-    context: document.getElementById('context').value,
-    Deadline: document.getElementById('deadline').value,
-    PIC: document.getElementById('pic').value
+    name,
+    type,
+    context,
+    Deadline,
+    PIC
   };
   
   const response = await fetch('/createIncident', {
@@ -60,27 +73,26 @@ async function submitForm(event) {
   
   if (response.status === 200) {
     alert('Incident created successfully');
-      //document.getElementById('incidentForm').reset();
-      //fetchData();
   } else {
     alert('Error creating incident');
   }
-    
   fetchData();
 }
 
-listSection.addEventListener('click', async function(event) {
-  if (event.target.classList.contains('deleteBtn')) {
-    const incidentId = event.target.id;
-    const response = await fetch(`/deleteIncident/${incidentId}`, { method: 'DELETE' });
-    if (response.status === 200) {
-      alert('Incident deleted successfully');
-    } else {
-      alert('Error deleting incident');
-    }
+
+async function deleteIncident(id) {
+  const incidentId = id;
+  const response = await fetch(`/deleteIncident/${incidentId}`, { method: 'DELETE'});
+  if (response.status === 200) {
+    alert('Incident deleted successfully');
+  } else {
+    alert('Error deleting incident');
   }
-  else if (event.target.classList.contains('updateBtn')) {
-    const tempArr = event.target.id.split(",");
+  refresh();
+}
+
+async function updateIncident(id) {
+  const tempArr = id.split(",");
     const incidentId = tempArr[0];
     const tgtStatus = tempArr[1];
     const response = await fetch(`/updateIncident/${incidentId}`, { 
@@ -95,10 +107,9 @@ listSection.addEventListener('click', async function(event) {
     } else {
       //alert('Error updating incident');
     }
-  }
+  
   refresh();
-});
-
+}
 
 function refresh() {
   listSection.innerHTML = '';
@@ -107,5 +118,4 @@ function refresh() {
 }
 
 document.addEventListener("DOMContentLoaded", fetchData());
-document.getElementById('submitBtn').addEventListener('click', submitForm);
 

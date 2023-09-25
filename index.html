@@ -13,46 +13,34 @@
 
 <body>
     <section id="Main" class="vh-100" style="background-color: #eee;">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col col-lg-9 col-xl-7">
-                    <div class="card rounded-3">
-                        <div class="card-body p-4"> 
-                            <h4 class="text-center my-3 pb-3">To Do App</h4>        
-                            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">
-                                <div class="col-12">
-                                    <div class="form-outline">
-                                        <form id="incidentForm">
-                                            <label for="name">Name:</label>
-                                            <input type="text" id="name" name="name" required>
+        <h4 class="text-center my-3 pb-3">To Do App</h4>        
+            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">        
+                <div class="form-outline">
+                    <form id="incidentForm">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
                                         
-                                            <label for="type">Type:</label>
-                                            <input type="text" id="type" name="type" required>
+                        <label for="type">Type:</label>
+                        <input type="text" id="type" name="type" required>
                                         
-                                            <label for="context">Context:</label>
-                                            <textarea id="context" name="context"></textarea>
+                        <label for="context">Context:</label>
+                        <textarea id="context" name="context"></textarea>
                                         
-                                            <label for="deadline">Deadline:</label>
-                                            <input type="datetime-local" id="deadline" name="deadline" required>
+                        <label for="deadline">Deadline:</label>
+                        <input type="datetime-local" id="deadline" name="deadline" required>
                                         
-                                            <label for="pic">PIC:</label>
-                                            <input type="text" id="pic" name="pic" required>
-                                        
-                                        </form>
-                                    </div>
-                                </div>
+                        <label for="pic">PIC:</label>
+                        <input type="text" id="pic" name="pic" required>
+
+                        <p id="error-message"></p>
+                        
+                    </form>
+                </div>  
             
-                                <div id="submitBtn" class="col-12" onclick="submitForm()">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
-        
-                            
-                        </div>
-                    </div>
+                <div id="submitBtn" class="col-12" onclick="submitForm()">
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </div>
-        </div>
+            </form>
     </section>
     <section id="List" class="vh-100" style="background-color: #eee;">
         <!--Placeholder for list of incidents-->
