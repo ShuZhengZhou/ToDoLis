@@ -7,8 +7,7 @@
   <title><%= locals.title %></title>
   <meta name="description" content="<%= locals.description %>">
   <link rel="stylesheet" href="/css/ToDoList.css">
-  <script type="text/javascript" defer src="/js/script.js"></script>
-  <script type="text/javascript" defer src="/js/fetchData.js"></script>
+  <script type="text/javascript" defer src="/src/script.js"></script>
 </head>
 
 <body>
@@ -18,19 +17,19 @@
                 <div class="form-outline">
                     <form id="incidentForm">
                         <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" required>
+                        <input type="text" id="name" name="name" value="Test" required>
                                         
                         <label for="type">Type:</label>
-                        <input type="text" id="type" name="type" required>
+                        <input type="text" id="type" name="type" value="Test"required>
                                         
                         <label for="context">Context:</label>
-                        <textarea id="context" name="context"></textarea>
+                        <textarea id="context" name="context" value="TestContext"></textarea>
                                         
                         <label for="deadline">Deadline:</label>
-                        <input type="datetime-local" id="deadline" name="deadline" required>
+                        <input type="datetime-local" id="deadline" name="deadline" value="2028-06-12T19:30" required>
                                         
                         <label for="pic">PIC:</label>
-                        <input type="text" id="pic" name="pic" required>
+                        <input type="text" id="pic" name="pic" value="CZ" required>
 
                         <p id="error-message"></p>
                         
