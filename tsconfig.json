@@ -9,5 +9,5 @@
       "esModuleInterop": true,
       "moduleResolution": "node"
     },
-    "include": ["public/src/*", "server.ts", "server.ts"] // Read in any files it understands in the pubilc/src directory (with include).
-  }
+    "include": ["public/src/*", "server.ts", "uri.ts"] // Read in any files it understands in the pubilc/src directory (with include).
+}

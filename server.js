@@ -41,12 +41,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importDefault(require("mongoose"));
-var url = "mongodb+srv://szhoubf:Zh20000815@cluster0.sh1tefq.mongodb.net/?retryWrites=true&w=majority";
+var uri_1 = __importDefault(require("./uri"));
+//const url = ``;
 var connectionParams = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 };
-mongoose_1.default.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, }).then(function () { console.log('Connected to the database '); }).catch(function (err) { console.error("Error connecting to the database. n".concat(err)); });
+mongoose_1.default.connect(uri_1.default, { useNewUrlParser: true, useUnifiedTopology: true, }).then(function () { console.log('Connected to the database '); }).catch(function (err) { console.error("Error connecting to the database. n".concat(err)); });
 //-------------------------
 var model_1 = __importDefault(require("./public/src/model"));
 var express_1 = __importDefault(require("express"));

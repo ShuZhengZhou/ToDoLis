@@ -3,7 +3,8 @@
 
 import mongoose  from 'mongoose';
 import { ConnectOptions } from 'mongoose';
-const url = `mongodb+srv://szhoubf:Zh20000815@cluster0.sh1tefq.mongodb.net/?retryWrites=true&w=majority`;
+import uri from './uri'
+//const url = ``;
 
 const connectionParams = {
   useNewUrlParser: true,
@@ -11,8 +12,7 @@ const connectionParams = {
 };
 
 
-
-mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true,} as ConnectOptions).then( 
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true,} as ConnectOptions).then( 
     () => {console.log('Connected to the database ')}
     ).catch(
          (err) => {console.error(`Error connecting to the database. n${err}`);}
