@@ -7,31 +7,31 @@ var mongoose_1 = __importDefault(require("mongoose"));
 var IncidentSchema = new mongoose_1.default.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     type: {
         type: String,
-        required: true
+        required: true,
     },
     context: {
-        type: String
+        type: String,
     },
     CreatedAt: {
         type: Date,
-        default: Date.now
+        default: Date.now,
     },
     Deadline: {
         type: Date,
-        required: true
+        required: true,
     },
     PIC: {
         type: String,
-        required: true
+        required: true,
     },
     status: {
         type: String,
         required: true,
-        default: 'New'
-    }
+        default: "New",
+    },
 });
-exports.default = mongoose_1.default.model('Incident', IncidentSchema);
+exports.default = mongoose_1.default.model("Incident", IncidentSchema);

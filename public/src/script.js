@@ -36,8 +36,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var DisplayedIncidents = [];
-var mainSection = document.getElementById('Main');
-var listSection = document.getElementById('List');
+var mainSection = document.getElementById("Main");
+var listSection = document.getElementById("List");
 function fetchData() {
     return __awaiter(this, void 0, void 0, function () {
         var response, data, IncidentsList;
@@ -45,7 +45,7 @@ function fetchData() {
             switch (_a.label) {
                 case 0:
                     console.log("FetchData");
-                    return [4 /*yield*/, fetch('/incidents')];
+                    return [4 /*yield*/, fetch("/incidents")];
                 case 1:
                     response = _a.sent();
                     return [4 /*yield*/, response.json()];
@@ -61,7 +61,7 @@ function fetchData() {
                         else {
                             DisplayedIncidents.push(incident._id);
                         }
-                        var incidentDiv = document.createElement('div');
+                        var incidentDiv = document.createElement("div");
                         incidentDiv.innerHTML = "\n        <h3>".concat(incident.name, "</h3>\n        <p>Type: ").concat(incident.type, "</p>\n        <p>Context: ").concat(incident.context, "</p>\n        <p>Created At: ").concat(new Date(incident.CreatedAt).toLocaleString(), "</p>\n        <p>Deadline: ").concat(new Date(incident.Deadline).toLocaleString(), "</p>\n        <p>PIC: ").concat(incident.PIC, "</p>\n        <p>Status: ").concat(incident.status, "</p>\n        <button class=\"deleteBtn\" id=\"").concat(incident._id, "\" onclick=\"deleteIncident(id)\">Delete</button>\n        <div class=\"dropdown\">\n          <button class=\"dropbtn\" id=\"").concat(incident._id, "\">Change Status</button>\n          <div class=\"dropdown-content\">\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",New\" onclick=\"updateIncident(id)\">New</button>\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",Completed\" onclick=\"updateIncident(id)\">Completed</button>\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",In Progress\" onclick=\"updateIncident(id)\">In progress</button>\n          </div>\n        </div>\n      ");
                         listSection.appendChild(incidentDiv);
                     });
@@ -77,15 +77,18 @@ function submitForm() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    name = document.getElementById('name').value;
-                    type = document.getElementById('type').value;
-                    context = document.getElementById('context').value;
-                    Deadline = document.getElementById('deadline').value;
-                    PIC = document.getElementById('pic').value;
+                    name = document.getElementById("name")
+                        .value;
+                    type = document.getElementById("type")
+                        .value;
+                    context = document.getElementById("context")
+                        .value;
+                    Deadline = (document.getElementById("deadline")).value;
+                    PIC = document.getElementById("pic").value;
                     if (!name || !type || !Deadline || !PIC) {
-                        errorMessage = document.getElementById('error-message');
+                        errorMessage = document.getElementById("error-message");
                         errorMessage.textContent = "Please fill out all required fields";
-                        errorMessage.style.color = 'red';
+                        errorMessage.style.color = "red";
                         return [2 /*return*/];
                     }
                     incidentData = {
@@ -93,22 +96,22 @@ function submitForm() {
                         type: type,
                         context: context,
                         Deadline: Deadline,
-                        PIC: PIC
+                        PIC: PIC,
                     };
-                    return [4 /*yield*/, fetch('/createIncident', {
-                            method: 'POST',
+                    return [4 /*yield*/, fetch("/createIncident", {
+                            method: "POST",
                             headers: {
-                                'Content-Type': 'application/json'
+                                "Content-Type": "application/json",
                             },
-                            body: JSON.stringify(incidentData)
+                            body: JSON.stringify(incidentData),
                         })];
                 case 1:
                     response = _a.sent();
                     if (response.status === 200) {
-                        alert('Incident created successfully');
+                        alert("Incident created successfully");
                     }
                     else {
-                        alert('Error creating incident');
+                        alert("Error creating incident");
                     }
                     fetchData();
                     return [2 /*return*/];
@@ -123,14 +126,16 @@ function deleteIncident(id) {
             switch (_a.label) {
                 case 0:
                     incidentId = id;
-                    return [4 /*yield*/, fetch("/deleteIncident/".concat(incidentId), { method: 'DELETE' })];
+                    return [4 /*yield*/, fetch("/deleteIncident/".concat(incidentId), {
+                            method: "DELETE",
+                        })];
                 case 1:
                     response = _a.sent();
                     if (response.status === 200) {
-                        alert('Incident deleted successfully');
+                        alert("Incident deleted successfully");
                     }
                     else {
-                        alert('Error deleting incident');
+                        alert("Error deleting incident");
                     }
                     refresh();
                     return [2 /*return*/];
@@ -148,16 +153,16 @@ function updateIncident(id) {
                     incidentId = tempArr[0];
                     tgtStatus = tempArr[1];
                     return [4 /*yield*/, fetch("/updateIncident/".concat(incidentId), {
-                            method: 'PUT',
+                            method: "PUT",
                             headers: {
-                                'Content-Type': 'application/json'
+                                "Content-Type": "application/json",
                             },
-                            body: JSON.stringify({ newStatus: tgtStatus })
+                            body: JSON.stringify({ newStatus: tgtStatus }),
                         })];
                 case 1:
                     response = _a.sent();
                     if (response.status === 200) {
-                        alert('Incident updated successfully');
+                        alert("Incident updated successfully");
                     }
                     else {
                         //alert('Error updating incident');
@@ -169,7 +174,7 @@ function updateIncident(id) {
     });
 }
 function refresh() {
-    listSection.innerHTML = '';
+    listSection.innerHTML = "";
     DisplayedIncidents = [];
     fetchData();
 }

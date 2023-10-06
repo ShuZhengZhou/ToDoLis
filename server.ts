@@ -1,45 +1,46 @@
-
 //------------------------ Defining MongoDb Connection
 
-import mongoose  from 'mongoose';
-import { ConnectOptions } from 'mongoose';
-import uri from './uri'
+import mongoose from "mongoose";
+import { ConnectOptions } from "mongoose";
+import uri from "./uri";
 //const url = ``;
 
-const connectionParams = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true 
-};
-
-
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true,} as ConnectOptions).then( 
-    () => {console.log('Connected to the database ')}
-    ).catch(
-         (err) => {console.error(`Error connecting to the database. n${err}`);}
-    );
-
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  } as ConnectOptions)
+  .then(() => {
+    console.log("Connected to the database ");
+  })
+  .catch((err) => {
+    console.error(`Error connecting to the database. n${err}`);
+  });
 
 //-------------------------
-import Incident from './public/src/model';
+//import Incident from './public/src/model';
 
-import express from 'express';
+import express from "express";
 const app = express();
 const PORT = 3000;
 
 //---------------For input new incident--------------------
-import bodyParser from'body-parser';
+import bodyParser from "body-parser";
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //---------------------------------------------------------
+import incidentRouter from "./public/src/routes/incidents";
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.use(express.json());
 
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
-  });
+app.get("/", function (req, res) {
+  res.sendFile(__dirname + "/index.html");
+});
 
-app.get('/incidents', async function(req, res) {
+app.use("/", incidentRouter);
+
+/*app.get('/incidents', async function(req, res) {
     const incidents = await Incident.find();
     res.send({ incidents });
   });
@@ -80,10 +81,9 @@ app.put('/updateIncident/:id', async function(req, res) {
     //console.error(`Error updating incident. ${err}`);
     res.sendStatus(500);
   }
+});*/
+
+app.listen(PORT, function () {
+  console.log("server started");
+  console.log(`Listening to Port ${PORT}`);
 });
-
-
-app.listen(PORT, function() {
-    console.log('server started');
-    console.log(`Listening to Port ${PORT}`);
-})

@@ -1,51 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= locals.title %></title>
-  <meta name="description" content="<%= locals.description %>">
-  <link rel="stylesheet" href="/css/ToDoList.css">
-  <script type="text/javascript" defer src="/src/script.js"></script>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= locals.title %></title>
+    <meta name="description" content="<%= locals.description %>" />
+    <link rel="stylesheet" href="/css/ToDoList.css" />
+    <script type="text/javascript" defer src="/src/script.js"></script>
+  </head>
 
-<body>
-    <section id="Main" class="vh-100" style="background-color: #eee;">
-        <h4 class="text-center my-3 pb-3">To Do App</h4>        
-            <form class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2">        
-                <div class="form-outline">
-                    <form id="incidentForm">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" value="Test" required>
-                                        
-                        <label for="type">Type:</label>
-                        <input type="text" id="type" name="type" value="Test"required>
-                                        
-                        <label for="context">Context:</label>
-                        <textarea id="context" name="context" value="TestContext"></textarea>
-                                        
-                        <label for="deadline">Deadline:</label>
-                        <input type="datetime-local" id="deadline" name="deadline" value="2028-06-12T19:30" required>
-                                        
-                        <label for="pic">PIC:</label>
-                        <input type="text" id="pic" name="pic" value="CZ" required>
+  <body>
+    <section id="Main" class="vh-100" style="background-color: #eee">
+      <h4 class="text-center my-3 pb-3">To Do App</h4>
+      <form
+        class="row row-cols-lg-auto g-3 justify-content-center align-items-center mb-4 pb-2"
+      >
+        <div class="form-outline">
+          <form id="incidentForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="Test" required />
 
-                        <p id="error-message"></p>
-                        
-                    </form>
-                </div>  
-            
-                <div id="submitBtn" class="col-12" onclick="submitForm()">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
+            <label for="type">Type:</label>
+            <input type="text" id="type" name="type" value="Test" required />
+
+            <label for="context">Context:</label>
+            <textarea
+              id="context"
+              name="context"
+              value="TestContext"
+            ></textarea>
+
+            <label for="deadline">Deadline:</label>
+            <input
+              type="datetime-local"
+              id="deadline"
+              name="deadline"
+              value="2028-06-12T19:30"
+              required
+            />
+
+            <label for="pic">PIC:</label>
+            <input type="text" id="pic" name="pic" value="CZ" required />
+
+            <p id="error-message"></p>
+          </form>
+        </div>
+
+        <div id="submitBtn" class="col-12" onclick="submitForm()">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
     </section>
-    <section id="List" class="vh-100" style="background-color: #eee;">
-        <!--Placeholder for list of incidents-->
+    <section id="List" class="vh-100" style="background-color: #eee">
+      <!--Placeholder for list of incidents-->
     </section>
-</body>
+  </body>
 
-<footer class="footer">
-    Built with NodeJs & MongoDB
-</footer>
+  <footer class="footer">Built with NodeJs & MongoDB</footer>
+</html>

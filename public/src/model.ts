@@ -3,32 +3,32 @@ import mongoose from "mongoose";
 const IncidentSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   type: {
     type: String,
-    required: true
+    required: true,
   },
   context: {
-    type: String
+    type: String,
   },
   CreatedAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   Deadline: {
     type: Date,
-    required: true
+    required: true,
   },
   PIC: {
     type: String,
-    required: true
+    required: true,
   },
   status: {
     type: String,
     required: true,
-    default: 'New' 
-  }
+    default: "New",
+  },
 });
 
-export default mongoose.model('Incident', IncidentSchema);
+export default mongoose.model("Incident", IncidentSchema);
