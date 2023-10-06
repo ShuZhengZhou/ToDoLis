@@ -1,4 +1,4 @@
-var DisplayedIncidents: String[] = [];
+var DisplayedIncidentsList: string[] = [];
 const mainSection: HTMLElement = document.getElementById("Main")!;
 const listSection: HTMLElement = document.getElementById("List")!;
 
@@ -22,15 +22,19 @@ async function fetchData() {
 
   const IncidentsList = data.incidents;
   console.log(IncidentsList);
+
+  
   // Display the incidents data on the page
   IncidentsList.forEach((incident) => {
-    if (DisplayedIncidents.includes(incident._id)) {
+
+    if (DisplayedIncidentsList.includes(incident._id)) {
       return;
     } else {
-      DisplayedIncidents.push(incident._id);
+      DisplayedIncidentsList.push(incident._id);
     }
 
     const incidentDiv = document.createElement("div");
+    incidentDiv.setAttribute("id", `Incident_${incident._id}`);
     incidentDiv.innerHTML = `
         <h3>${incident.name}</h3>
         <p>Type: ${incident.type}</p>
@@ -38,7 +42,7 @@ async function fetchData() {
         <p>Created At: ${new Date(incident.CreatedAt).toLocaleString()}</p>
         <p>Deadline: ${new Date(incident.Deadline).toLocaleString()}</p>
         <p>PIC: ${incident.PIC}</p>
-        <p>Status: ${incident.status}</p>
+        <p id="Status_${incident._id}">Status: ${incident.status}</p>
         <button class="deleteBtn" id="${
           incident._id
         }" onclick="deleteIncident(id)">Delete</button>
@@ -105,7 +109,7 @@ async function submitForm() {
   fetchData();
 }
 
-async function deleteIncident(id: String) {
+async function deleteIncident(id: string) {
   const incidentId = id;
   const response = await fetch(`/deleteIncident/${incidentId}`, {
     method: "DELETE",
@@ -115,7 +119,9 @@ async function deleteIncident(id: String) {
   } else {
     alert("Error deleting incident");
   }
-  refresh();
+  
+  removeDivElementById("Incident_" + id);
+
 }
 
 async function updateIncident(id: String) {
@@ -135,13 +141,30 @@ async function updateIncident(id: String) {
     //alert('Error updating incident');
   }
 
-  refresh();
+  const DisplayedStatus: HTMLElement = document.getElementById(`Status_${incidentId}`)!;
+  DisplayedStatus.textContent = tgtStatus;
 }
 
 function refresh() {
   listSection.innerHTML = "";
-  DisplayedIncidents = [];
+  DisplayedIncidentsList = [];
   fetchData();
+}
+
+function removeDivElementById(id: string): void {
+  // Find the div element with the provided id
+  const divElement = document.getElementById(id);
+
+  // Check if the element exists
+  if (divElement) {
+    // Get the parent node of the div element
+    const parentElement = divElement.parentNode;
+
+    // Remove the div element from the parent node
+    if (parentElement) {
+      parentElement.removeChild(divElement);
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", fetchData);

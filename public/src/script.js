@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var DisplayedIncidents = [];
+var DisplayedIncidentsList = [];
 var mainSection = document.getElementById("Main");
 var listSection = document.getElementById("List");
 function fetchData() {
@@ -55,14 +55,15 @@ function fetchData() {
                     console.log(IncidentsList);
                     // Display the incidents data on the page
                     IncidentsList.forEach(function (incident) {
-                        if (DisplayedIncidents.includes(incident._id)) {
+                        if (DisplayedIncidentsList.includes(incident._id)) {
                             return;
                         }
                         else {
-                            DisplayedIncidents.push(incident._id);
+                            DisplayedIncidentsList.push(incident._id);
                         }
                         var incidentDiv = document.createElement("div");
-                        incidentDiv.innerHTML = "\n        <h3>".concat(incident.name, "</h3>\n        <p>Type: ").concat(incident.type, "</p>\n        <p>Context: ").concat(incident.context, "</p>\n        <p>Created At: ").concat(new Date(incident.CreatedAt).toLocaleString(), "</p>\n        <p>Deadline: ").concat(new Date(incident.Deadline).toLocaleString(), "</p>\n        <p>PIC: ").concat(incident.PIC, "</p>\n        <p>Status: ").concat(incident.status, "</p>\n        <button class=\"deleteBtn\" id=\"").concat(incident._id, "\" onclick=\"deleteIncident(id)\">Delete</button>\n        <div class=\"dropdown\">\n          <button class=\"dropbtn\" id=\"").concat(incident._id, "\">Change Status</button>\n          <div class=\"dropdown-content\">\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",New\" onclick=\"updateIncident(id)\">New</button>\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",Completed\" onclick=\"updateIncident(id)\">Completed</button>\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",In Progress\" onclick=\"updateIncident(id)\">In progress</button>\n          </div>\n        </div>\n      ");
+                        incidentDiv.setAttribute("id", "Incident_".concat(incident._id));
+                        incidentDiv.innerHTML = "\n        <h3>".concat(incident.name, "</h3>\n        <p>Type: ").concat(incident.type, "</p>\n        <p>Context: ").concat(incident.context, "</p>\n        <p>Created At: ").concat(new Date(incident.CreatedAt).toLocaleString(), "</p>\n        <p>Deadline: ").concat(new Date(incident.Deadline).toLocaleString(), "</p>\n        <p>PIC: ").concat(incident.PIC, "</p>\n        <p id=\"Status_").concat(incident._id, "\">Status: ").concat(incident.status, "</p>\n        <button class=\"deleteBtn\" id=\"").concat(incident._id, "\" onclick=\"deleteIncident(id)\">Delete</button>\n        <div class=\"dropdown\">\n          <button class=\"dropbtn\" id=\"").concat(incident._id, "\">Change Status</button>\n          <div class=\"dropdown-content\">\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",New\" onclick=\"updateIncident(id)\">New</button>\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",Completed\" onclick=\"updateIncident(id)\">Completed</button>\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",In Progress\" onclick=\"updateIncident(id)\">In progress</button>\n          </div>\n        </div>\n      ");
                         listSection.appendChild(incidentDiv);
                     });
                     return [2 /*return*/];
@@ -137,7 +138,7 @@ function deleteIncident(id) {
                     else {
                         alert("Error deleting incident");
                     }
-                    refresh();
+                    removeDivElementById("Incident_" + id);
                     return [2 /*return*/];
             }
         });
@@ -145,7 +146,7 @@ function deleteIncident(id) {
 }
 function updateIncident(id) {
     return __awaiter(this, void 0, void 0, function () {
-        var tempArr, incidentId, tgtStatus, response;
+        var tempArr, incidentId, tgtStatus, response, DisplayedStatus;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -167,7 +168,8 @@ function updateIncident(id) {
                     else {
                         //alert('Error updating incident');
                     }
-                    refresh();
+                    DisplayedStatus = document.getElementById("Status_".concat(incidentId));
+                    DisplayedStatus.textContent = tgtStatus;
                     return [2 /*return*/];
             }
         });
@@ -175,7 +177,20 @@ function updateIncident(id) {
 }
 function refresh() {
     listSection.innerHTML = "";
-    DisplayedIncidents = [];
+    DisplayedIncidentsList = [];
     fetchData();
+}
+function removeDivElementById(id) {
+    // Find the div element with the provided id
+    var divElement = document.getElementById(id);
+    // Check if the element exists
+    if (divElement) {
+        // Get the parent node of the div element
+        var parentElement = divElement.parentNode;
+        // Remove the div element from the parent node
+        if (parentElement) {
+            parentElement.removeChild(divElement);
+        }
+    }
 }
 document.addEventListener("DOMContentLoaded", fetchData);
