@@ -169,7 +169,7 @@ function updateIncident(id) {
                         //alert('Error updating incident');
                     }
                     DisplayedStatus = document.getElementById("Status_".concat(incidentId));
-                    DisplayedStatus.textContent = tgtStatus;
+                    DisplayedStatus.textContent = 'Status: ' + tgtStatus;
                     return [2 /*return*/];
             }
         });

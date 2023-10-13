@@ -142,7 +142,7 @@ async function updateIncident(id: String) {
   }
 
   const DisplayedStatus: HTMLElement = document.getElementById(`Status_${incidentId}`)!;
-  DisplayedStatus.textContent = tgtStatus;
+  DisplayedStatus.textContent = 'Status: ' + tgtStatus;
 }
 
 function refresh() {

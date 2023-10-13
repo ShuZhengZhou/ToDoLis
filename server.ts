@@ -2,8 +2,11 @@
 
 import mongoose from "mongoose";
 import { ConnectOptions } from "mongoose";
-import uri from "./uri";
+//import uri from "./uri";
 //const url = ``;
+
+const uri = `mongodb+srv://szhoubf:Zh20000815@cluster0.sh1tefq.mongodb.net/?retryWrites=true&w=majority`;
+
 
 mongoose
   .connect(uri, {
@@ -39,49 +42,6 @@ app.get("/", function (req, res) {
 });
 
 app.use("/", incidentRouter);
-
-/*app.get('/incidents', async function(req, res) {
-    const incidents = await Incident.find();
-    res.send({ incidents });
-  });
-
-app.post('/createIncident', async function(req, res) {
-    const incidentData = req.body;
-    const newIncident = new Incident(incidentData);
-    await newIncident.save();
-    res.sendStatus(200);
-  });
-
-
-app.delete('/deleteIncident/:id', async function(req, res) {
-  console.log('delete operation called');
-  const incidentId = req.params.id;
-  console.log(incidentId);
-  try {
-    await Incident.findByIdAndDelete(incidentId);
-    res.sendStatus(200);
-  } catch (err) {
-    console.error(`Error deleting incident. ${err}`);
-    res.sendStatus(500);
-  }
-});
-
-
-app.put('/updateIncident/:id', async function(req, res) {
-  console.log('update operation called');
-  const incidentId = req.params.id;
-  const newStatus = req.body.newStatus;
-  console.log(incidentId);
-  console.log(newStatus);
-  //console.log(req);
-  try {
-    await Incident.findByIdAndUpdate(incidentId, {status:newStatus});
-    res.sendStatus(200);
-  } catch (err) {
-    //console.error(`Error updating incident. ${err}`);
-    res.sendStatus(500);
-  }
-});*/
 
 app.listen(PORT, function () {
   console.log("server started");
