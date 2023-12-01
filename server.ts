@@ -2,14 +2,12 @@
 
 import mongoose from "mongoose";
 import { ConnectOptions } from "mongoose";
-//import uri from "./uri";
-//const url = ``;
+
 
 const uri = `mongodb+srv://szhoubf:Zh20000815@cluster0.sh1tefq.mongodb.net/?retryWrites=true&w=majority`;
 
 
-mongoose
-  .connect(uri, {
+mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   } as ConnectOptions)
