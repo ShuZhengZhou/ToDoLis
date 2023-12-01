@@ -40,7 +40,7 @@ var mainSection = document.getElementById("Main");
 var listSection = document.getElementById("List");
 function fetchData() {
     return __awaiter(this, void 0, void 0, function () {
-        var response, data, IncidentsList;
+        var response, data, IncidentsList, Buttons;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -63,15 +63,18 @@ function fetchData() {
                         }
                         var incidentDiv = document.createElement("div");
                         incidentDiv.setAttribute("id", "Incident_".concat(incident._id));
-                        incidentDiv.innerHTML = "\n        <h3>".concat(incident.name, "</h3>\n        <p>Type: ").concat(incident.type, "</p>\n        <p>Context: ").concat(incident.context, "</p>\n        <p>Created At: ").concat(new Date(incident.CreatedAt).toLocaleString(), "</p>\n        <p>Deadline: ").concat(new Date(incident.Deadline).toLocaleString(), "</p>\n        <p>PIC: ").concat(incident.PIC, "</p>\n        <p id=\"Status_").concat(incident._id, "\">Status: ").concat(incident.status, "</p>\n        <button class=\"deleteBtn\" id=\"").concat(incident._id, "\" onclick=\"deleteIncident(id)\">Delete</button>\n        <div class=\"dropdown\">\n          <button class=\"dropbtn\" id=\"").concat(incident._id, "\">Change Status</button>\n          <div class=\"dropdown-content\">\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",New\" onclick=\"updateIncident(id)\">New</button>\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",Completed\" onclick=\"updateIncident(id)\">Completed</button>\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",In Progress\" onclick=\"updateIncident(id)\">In progress</button>\n          </div>\n        </div>\n      ");
+                        incidentDiv.innerHTML = "\n        <h3>".concat(incident.name, "</h3>\n        <p>Type: ").concat(incident.type, "</p>\n        <p>Context: ").concat(incident.context, "</p>\n        <p>Created At: ").concat(new Date(incident.CreatedAt).toLocaleString(), "</p>\n        <p>Deadline: ").concat(new Date(incident.Deadline).toLocaleString(), "</p>\n        <p>PIC: ").concat(incident.PIC, "</p>\n        <p id=\"Status_").concat(incident._id, "\">Status: ").concat(incident.status, "</p>\n        <button class=\"deleteBtn\" id=\"delete_").concat(incident._id, "\">Delete</button>\n        <div class=\"dropdown\">\n          <button class=\"dropbtn\" id=\"").concat(incident._id, "\">Change Status</button>\n          <div class=\"dropdown-content\">\n            <button class=\"updateBtn\" id=\"").concat(incident._id, ",New\" onclick=\"updateIncident(id)\">New</button>\n            <button class=\"updateBtn\" id=\"update_").concat(incident._id, ",Completed\">Completed</button>\n            <button class=\"updateBtn\" id=\"update_").concat(incident._id, ",In Progress\">In progress</button>\n          </div>\n        </div>\n      ");
                         listSection.appendChild(incidentDiv);
+                    });
+                    Buttons = document.querySelectorAll("button");
+                    Buttons.forEach(function (Button) {
+                        Button.addEventListener("click", function () { return ButtonIdentify(Button.id); });
                     });
                     return [2 /*return*/];
             }
         });
     });
 }
-// Add this function to your fetchData.js file
 function submitForm() {
     return __awaiter(this, void 0, void 0, function () {
         var name, type, context, Deadline, PIC, errorMessage, incidentData, response;
@@ -166,7 +169,7 @@ function updateIncident(id) {
                         alert("Incident updated successfully");
                     }
                     else {
-                        //alert('Error updating incident');
+                        alert('Error updating incident');
                     }
                     DisplayedStatus = document.getElementById("Status_".concat(incidentId));
                     DisplayedStatus.textContent = 'Status: ' + tgtStatus;
@@ -179,6 +182,17 @@ function refresh() {
     listSection.innerHTML = "";
     DisplayedIncidentsList = [];
     fetchData();
+}
+function ButtonIdentify(id) {
+    var ButtonType = id.split("_")[0];
+    var IncidentId = id.split("_")[1];
+    switch (ButtonType) {
+        case "delete":
+            deleteIncident(IncidentId);
+            break;
+        case "update":
+            updateIncident(IncidentId);
+    }
 }
 function removeDivElementById(id) {
     // Find the div element with the provided id

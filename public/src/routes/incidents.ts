@@ -11,8 +11,14 @@ router.get("/incidents", async function (req, res) {
 router.post("/createIncident", async function (req, res) {
   const incidentData = req.body;
   const newIncident = new Incident(incidentData);
-  await newIncident.save();
-  res.sendStatus(200);
+  try{
+    await newIncident.save();
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(`Error creating incident. ${err}`);
+    res.sendStatus(500);
+  }
+
 });
 
 router.delete("/deleteIncident/:id", async function (req, res) {

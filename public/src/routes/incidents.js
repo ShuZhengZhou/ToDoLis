@@ -58,24 +58,33 @@ router.get("/incidents", function (req, res) {
 });
 router.post("/createIncident", function (req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var incidentData, newIncident;
+        var incidentData, newIncident, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     incidentData = req.body;
                     newIncident = new model_1.default(incidentData);
-                    return [4 /*yield*/, newIncident.save()];
+                    _a.label = 1;
                 case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, newIncident.save()];
+                case 2:
                     _a.sent();
                     res.sendStatus(200);
-                    return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 3:
+                    err_1 = _a.sent();
+                    console.error("Error creating incident. ".concat(err_1));
+                    res.sendStatus(500);
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
             }
         });
     });
 });
 router.delete("/deleteIncident/:id", function (req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var incidentId, err_1;
+        var incidentId, err_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -89,8 +98,8 @@ router.delete("/deleteIncident/:id", function (req, res) {
                     res.sendStatus(200);
                     return [3 /*break*/, 4];
                 case 3:
-                    err_1 = _a.sent();
-                    console.error("Error deleting incident. ".concat(err_1));
+                    err_2 = _a.sent();
+                    console.error("Error deleting incident. ".concat(err_2));
                     res.sendStatus(500);
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
@@ -100,7 +109,7 @@ router.delete("/deleteIncident/:id", function (req, res) {
 });
 router.put("/updateIncident/:id", function (req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var incidentId, newStatus, err_2;
+        var incidentId, newStatus, err_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -115,8 +124,8 @@ router.put("/updateIncident/:id", function (req, res) {
                     res.sendStatus(200);
                     return [3 /*break*/, 4];
                 case 3:
-                    err_2 = _a.sent();
-                    console.error("Error updating incident. ".concat(err_2));
+                    err_3 = _a.sent();
+                    console.error("Error updating incident. ".concat(err_3));
                     res.sendStatus(500);
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];

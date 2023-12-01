@@ -2,6 +2,7 @@ var DisplayedIncidentsList: string[] = [];
 const mainSection: HTMLElement = document.getElementById("Main")!;
 const listSection: HTMLElement = document.getElementById("List")!;
 
+
 async function fetchData() {
   console.log("FetchData");
   type Data = {
@@ -43,32 +44,31 @@ async function fetchData() {
         <p>Deadline: ${new Date(incident.Deadline).toLocaleString()}</p>
         <p>PIC: ${incident.PIC}</p>
         <p id="Status_${incident._id}">Status: ${incident.status}</p>
-        <button class="deleteBtn" id="${
-          incident._id
-        }" onclick="deleteIncident(id)">Delete</button>
+        <button class="deleteBtn" id="delete_${incident._id}">Delete</button>
         <div class="dropdown">
           <button class="dropbtn" id="${incident._id}">Change Status</button>
           <div class="dropdown-content">
             <button class="updateBtn" id="${
               incident._id
             },New" onclick="updateIncident(id)">New</button>
-            <button class="updateBtn" id="${
-              incident._id
-            },Completed" onclick="updateIncident(id)">Completed</button>
-            <button class="updateBtn" id="${
-              incident._id
-            },In Progress" onclick="updateIncident(id)">In progress</button>
+            <button class="updateBtn" id="update_${incident._id},Completed">Completed</button>
+            <button class="updateBtn" id="update_${incident._id},In Progress">In progress</button>
           </div>
         </div>
       `;
     listSection.appendChild(incidentDiv);
   });
+
+  var Buttons = document.querySelectorAll("button")
+  Buttons.forEach((Button) => {
+    Button.addEventListener("click", () => ButtonIdentify(Button.id));
+  })
 }
 
-// Add this function to your fetchData.js file
+
 async function submitForm() {
   const name: String = (<HTMLInputElement>document.getElementById("name"))
-    .value!;
+    .value;
   const type: String = (<HTMLInputElement>document.getElementById("type"))
     .value;
   const context: String = (<HTMLInputElement>document.getElementById("context"))
@@ -138,7 +138,7 @@ async function updateIncident(id: String) {
   if (response.status === 200) {
     alert("Incident updated successfully");
   } else {
-    //alert('Error updating incident');
+    alert('Error updating incident');
   }
 
   const DisplayedStatus: HTMLElement = document.getElementById(`Status_${incidentId}`)!;
@@ -149,6 +149,20 @@ function refresh() {
   listSection.innerHTML = "";
   DisplayedIncidentsList = [];
   fetchData();
+}
+
+function ButtonIdentify(id: string): void {
+  const ButtonType = id.split("_")[0];
+  const IncidentId = id.split("_")[1];
+
+  switch (ButtonType) {
+    case "delete":
+      deleteIncident(IncidentId);
+      break;
+    case "update":
+      updateIncident(IncidentId);
+  }
+
 }
 
 function removeDivElementById(id: string): void {
@@ -168,3 +182,5 @@ function removeDivElementById(id: string): void {
 }
 
 document.addEventListener("DOMContentLoaded", fetchData);
+
+
